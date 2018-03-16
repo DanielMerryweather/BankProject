@@ -36,7 +36,7 @@ public class FileParser {
 		return fin;
 	}
 	
-	public static void dataToMasterAccount(String data){
+	public static int dataToMasterAccount(String data){
 		int id = getIntegerData(data, "id:",",");
 		System.out.println(id);
 		String name = getStringData(data, "name:",",");
@@ -49,6 +49,7 @@ public class FileParser {
 			dataToAccount(currAccData);
 			accIndex = data.indexOf("[",accIndex+1);
 		}
+		return id;
 	}
 	
 	public static int getIntegerData(String all, String startPat, String endPat){
