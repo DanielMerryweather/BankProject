@@ -15,16 +15,18 @@ public class FileLoader {
 		accountArray = fileReader();
 	}
 	
-	public void getMasterAccount(int id){
+	public MasterAccount getMasterAccount(int id){
+		MasterAccount acc;
 		for(String s : accountArray){
-			int cid = FileParser.dataToMasterAccount(s);
-			if(id == cid)
-				System.out.println("Correct Account is " + s);
+			acc = FileParser.dataToMasterAccount(s);
+			if(acc.getId() == id)
+				return acc;
 		}
+		return null;
 	}
 	
-	void addToArray(int id, String name, String pass, String[] accs){
-		accountArray.add(FileParser.masterAccountToData(id, name, pass, accs));
+	void addToArray(MasterAccount ms){
+		accountArray.add(FileParser.masterAccountToData(ms.id, ms.name, ms.pass, ms.accounts));
 	}
 	
 	ArrayList<String> fileReader(){
@@ -53,13 +55,16 @@ public class FileLoader {
 			File file = new File("H://Desktop//Eclipse Work//GroupBankProject//src//bankData.txt");
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
+			bw.write("");
 			for (int i = 0; i < accountArr.size(); i++){
 				bw.write(accountArr.get(i));
 				bw.newLine();
 			}
+			bw.close();
 		}
 		catch (IOException e){
 			System.out.println("Error Ocurred");
 		}
+		
 	}
 }
