@@ -1,14 +1,6 @@
 import java.util.ArrayList;
 
 public class FileParser {
-
-	public static void main(String[] args){
-		String acc1 = accountToData(new Account(10000,"Savings"));
-		String acc2 = accountToData(new Account(1000,"Chequing"));
-		String mstacc = masterAccountToData(1,"Daniel","testpass",new String[]{acc1,acc2});
-		System.out.println(mstacc);
-		dataToMasterAccount(mstacc);
-	}
 	
 	public static String accountToData(Account a){
 		String fin = "[";
@@ -23,14 +15,14 @@ public class FileParser {
 		return new Account(balance,name);
 	}
 	
-	public static String masterAccountToData(int id, String name, String pass, String[] accs){
+	public static String masterAccountToData(int id, String name, String pass, ArrayList<Account> accs){
 		String fin = "[";
 		fin += "id:"+id+",";
 		fin += "name:"+name+",";
 		fin += "pass:"+pass+",";
 		fin += "accounts:{";
-		for(int i=0;i<accs.length;i++){
-			fin += accs[i] + (i==accs.length-1?"":",");
+		for(int i=0;i<accs.size();i++){
+			fin += accs.get(i) + (i==accs.size()-1?"":",");
 		}
 		fin += "}]";
 		return fin;
