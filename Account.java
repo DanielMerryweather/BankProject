@@ -3,14 +3,15 @@ package defaultpackage;
 import java.util.Scanner;
 
 public class Account {
-	public int id;
+	String id;
 	public double balance;
 	Scanner input = new Scanner(System.in);
-	public Account(){
+	public Account(double balance, String i){
+		String id;
 		this.id = 0;
 		this.balance = 0;
 	}
-	public Account(double balance, int id){
+	public Account(double balance, String id){
 		this.id = id;
 		this.balance = balance;
 	}
