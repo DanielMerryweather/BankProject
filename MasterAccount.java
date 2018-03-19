@@ -32,8 +32,16 @@ public class MasterAccount {
 		}
 	}
 	
-	public void createAccount(Account a){
+	public void addAccount(Account a){
 		accounts.add(a);
+	}
+	
+	public void deleteAccount(Account a){
+		for(int i=0;i<accounts.size();i++){
+			if(accounts.get(i).id == a.id){
+				accounts.remove(i);
+			}
+		}
 	}
 
 	public int getId() {
