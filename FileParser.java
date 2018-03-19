@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class FileParser {
 
@@ -35,20 +36,18 @@ public class FileParser {
 		return fin;
 	}
 	
-	public static int dataToMasterAccount(String data){
+	public static MasterAccount dataToMasterAccount(String data){
 		int id = getIntegerData(data, "id:",",");
-		System.out.println(id);
 		String name = getStringData(data, "name:",",");
-		System.out.println(name);
 		String pass = getStringData(data, "pass:",",");
-		System.out.println(pass);
 		int accIndex = data.indexOf("[",1);
+		ArrayList<Account> accs = new ArrayList<Account>();
 		while(accIndex != -1){
 			String currAccData = data.substring(accIndex, data.indexOf("]",accIndex)+1);
-			dataToAccount(currAccData);
+			accs.add(dataToAccount(currAccData));
 			accIndex = data.indexOf("[",accIndex+1);
 		}
-		return id;
+		return new MasterAccount(id, name, pass, accs);
 	}
 	
 	public static int getIntegerData(String all, String startPat, String endPat){
