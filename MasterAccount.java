@@ -8,6 +8,14 @@ public class MasterAccount {
 	
 	ArrayList<Account> accounts = new ArrayList<Account>();
 	
+	
+	/**
+	 * Master Account Constructor
+	 * @param id - Unique account identifing number
+	 * @param name - Name of account holder
+	 * @param pass - Password to master account
+	 * @param accounts - Accounts in the master account
+	 */
 	public MasterAccount(int id, String name, String pass, ArrayList<Account> accounts) {
 		this.id = id;
 		this.name = name;
@@ -15,9 +23,14 @@ public class MasterAccount {
 		this.accounts = accounts;
 	}
 	
+	/**
+	 * Returns account from this master account from a specific id
+	 * @param id
+	 * @return Account
+	 */
 	public Account loadAccount(String id){
 		for(Account a : accounts){
-			if(a.id == id){
+			if(a.id.equals(id)){
 				return a;
 			}
 		}
@@ -26,7 +39,7 @@ public class MasterAccount {
 	
 	public void saveAccount(Account acc){
 		for(Account a : accounts){
-			if(a.id == acc.id){
+			if(a.id.equals(acc.id)){
 				a.balance = acc.balance;
 			}
 		}
