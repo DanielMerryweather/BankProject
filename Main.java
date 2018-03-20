@@ -20,7 +20,10 @@ public class Main {
 		Scanner keyboardNum = new Scanner(System.in);
 		Scanner keyboardWord = new Scanner(System.in);
 		FileLoader fl = new FileLoader();
-		System.out.println("Welcome to DHP Bank\nPlease enter your id.");
+		//fl.addMasterAccount(new MasterAccount(0,"James","test4",new ArrayList<Account>()));
+		System.out.println("Welcome to DHP Bank\nWould you like to:\n1. Enter account\n2. Create account\n3. Delete Account");
+		int mainChoice = keyboardNum.nextInt();
+		if (mainChoice == 1){
 		int id = keyboardNum.nextInt();
 		MasterAccount ms = fl.getMasterAccount(id);
 		System.out.println("What is the password to the account?");
@@ -28,13 +31,14 @@ public class Main {
 		while (!passwordCheck(password, ms)) {
 			password = keyboardWord.nextLine();
 		}
-		System.out.println("Would you like to:\n1. Edit account\2. Add Account");
+		System.out.println("Would you like to:\n1. Edit account(s)\n2. Add Account");
 		int numTyped = keyboardNum.nextInt();
 		if (numTyped == 1) {
 			System.out.println("Sub-accounts in account are:");
 			for (Account a : ms.accounts) {
 				System.out.println("Account: " + a.id + ", Balance: " + a.balance);
 			}
+			System.out.println("Which account would you like to edit?");
 
 			String accChosen = keyboardWord.nextLine();
 			while (!accChosen.equals("Savings") && !accChosen.equals("Chequing")) {
@@ -48,13 +52,33 @@ public class Main {
 				currAcc.deposit();
 			} else if (numTyped2 == 2) {
 				currAcc.withdraw();
+				
 			} else if (numTyped2 == 3) {
-				currAcc.getBalance();
+				System.out.println(currAcc.getBalance());
 			} else if (numTyped2 == 4) {
-
+				
 			}
 		} else if (numTyped == 2) {
-
+			System.out.println("Would you like to create a:\n1.Savings account\n2.Chequing account");
+			int userInput = keyboardNum.nextInt();
+			if (userInput == 1){
+				System.out.println("How much money will be in the account?");
+				double baseAmount = keyboardNum.nextDouble();
+				ms.addAccount(new Account(baseAmount,"Savings"));
+				fl.saveMasterAccount(ms);
+			}
+			else if (userInput == 2){
+				System.out.println("How much money will be in the acount?");
+				double baseAmount = keyboardNum.nextDouble();
+				ms.addAccount(new Account(baseAmount,"Chequing"));
+			}
+		}
+		}
+		else if (mainChoice == 2){
+			
+		}
+		else if (mainChoice == 3){
+			
 		}
 
 	}
@@ -65,6 +89,12 @@ public class Main {
 			System.out.println("Password is incorrect, please re-enter.");
 		}
 		return state;
+	}
+	
+	public static void createAccount(){
+		Scanner keyboardNum = new Scanner(System.in);
+		Scanner keyboardWord = new Scanner(System.in);
+		System.out.println("What would you like to name the account?");
 	}
 
 }
