@@ -59,11 +59,11 @@ public class MasterAccount {
 	
 	/**
 	 * Deletes an account from this master account
-	 * @param a - Account
+	 * @param id - Account name
 	 */
-	public void deleteAccount(Account a){
+	public void deleteAccount(String id){
 		for(int i=0;i<accounts.size();i++){
-			if(accounts.get(i).id == a.id){
+			if(accounts.get(i).id.equals(id)){
 				accounts.remove(i);
 			}
 		}
