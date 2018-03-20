@@ -1,21 +1,13 @@
-package defaultpackage;
+
 import java.util.Scanner;
 
-/**
- * @author Punit Thanki
- * Start Date: 2018/03/14
- * End Date: 20180/03/19 
- * UserID: 20218002	
- * Version 1
- */
-
 public class Account {
-	public String id;
+	String id;
 	public double balance;
 	Scanner input = new Scanner(System.in);
 	public Account(){
 		this.id = "";
-		this.balance = 0;
+		this.balance = 100;
 	}
 	public Account(double balance, String id){
 		this.id = id;
@@ -23,52 +15,42 @@ public class Account {
 	}
 	public void deposit(){
 		System.out.println("How much would you like to deposit?");
-		double amountD = 0;
-		try{
-			amountD = input.nextDouble();
-		}
-		catch(Exception e){
-			System.out.println("Invalid input!! Please please enter a number greater than 0");
-			amountD = -1;
-			input.next();
-		}
-		while(amountD<0 || !input.hasNextDouble()){
-			System.out.println("Invalid input!! Please please enter a valid number.");
-			try{
-				amountD = input.nextDouble();
-			}
-			catch(Exception e){
-				amountD = -1;
-				input.next();
-			}
-		}
-		this.balance+=amountD;	
-		System.out.println("Your new balance is " + this.balance);
-		
+		this.balance += getDoubleInput();
+		System.out.println("New Balance: " + this.balance);
 	}
 	public void withdraw(){
+		if(this.balance <= 0){
+			System.out.println("Cannot withdraw from an account with no funds");
+			return;
+		}
 		System.out.println("How much would you like to withdraw?");
-		double amountW = input.nextDouble();
+		double amountW = getDoubleInput();
 		while(balance<amountW){
-			System.out.println("Insufficient Funds! You only have" + balance + "dollars");
-			amountW = input.nextDouble();
+			System.out.println("Insufficient Funds! You only have " + balance + " dollars");
+			amountW = getDoubleInput();
 		}
-		while(amountW<0 || !input.hasNextDouble()){
-			System.out.println("Invalid input!! Please please enter a number greater than 0");		
-		try{
-			amountW = input.nextDouble();
-		}
-		catch(Exception e){
-			amountW = -1;
-			input.next();
-		}
+		this.balance -= amountW;
+		System.out.println("New Balance: " + this.balance);
 	}
-		if(balance>amountW){
-			this.balance-=amountW;
+	public double getDoubleInput(){
+		double amount = 0;
+		String in = "";
+		while(true){
+			in = input.nextLine();
+			try{
+				amount = Double.parseDouble(in);
+			}catch(Exception e){
+				System.out.println("Invalid input, try again");
+				continue;
+			}
+			if(amount > 0){
+				break;
+			}else{
+				System.out.println("Invalid input, please try a positive value");
+			}
 		}
-		System.out.println("Your new balance is " + this.balance);
+		return amount;
 	}
-	
 	public String getId() {
 		return id;
 	}
@@ -81,6 +63,10 @@ public class Account {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	
-}
+	public static void main(String[] args){
+		
+		new Account().withdraw();
 
+	}
+
+}
