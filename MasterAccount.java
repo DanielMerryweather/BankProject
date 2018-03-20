@@ -37,6 +37,10 @@ public class MasterAccount {
 		return null;
 	}
 	
+	/**
+	 * Saves account in this master account
+	 * @param acc - specified account
+	 */
 	public void saveAccount(Account acc){
 		for(Account a : accounts){
 			if(a.id.equals(acc.id)){
@@ -45,10 +49,18 @@ public class MasterAccount {
 		}
 	}
 	
+	/**
+	 * Adds an account to this master account
+	 * @param a - Account
+	 */
 	public void addAccount(Account a){
 		accounts.add(a);
 	}
 	
+	/**
+	 * Deletes an account from this master account
+	 * @param a - Account
+	 */
 	public void deleteAccount(Account a){
 		for(int i=0;i<accounts.size();i++){
 			if(accounts.get(i).id == a.id){
@@ -57,34 +69,66 @@ public class MasterAccount {
 		}
 	}
 
+	/**
+	 * Gets the id of this master account
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id of this master account
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the name of this master account
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * Sets the name of this master account
+	 * @param id
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the password of this master account
+	 * @return
+	 */
 	public String getPass() {
 		return pass;
 	}
 
+	/**
+	 * Sets the password of this master account
+	 * @param id
+	 */
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
 
+	/**
+	 * Gets the accounts of this master account
+	 * @return
+	 */
 	public ArrayList<Account> getAccounts() {
 		return accounts;
 	}
 
+	/**
+	 * Sets the accounts of this master account
+	 * @param id
+	 */
 	public void setAccounts(ArrayList<Account> accounts) {
 		this.accounts = accounts;
 	}
