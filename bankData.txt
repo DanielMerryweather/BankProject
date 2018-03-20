@@ -1,0 +1,3 @@
+[id:1,name:Daniel,pass:test,accounts:{[name:Savings,balance:1000.0],[name:Chequing,balance:2000.0]}]
+[id:2,name:Harrison,pass:test2,accounts:{[name:Savings,balance:1500.0],[name:Chequing,balance:2500.0]}]
+[id:3,name:Punit,pass:test3,accounts:{[name:Savings,balance:1000.0]}]
