@@ -23,17 +23,26 @@ public class Account {
 	}
 	public void deposit(){
 		System.out.println("How much would you like to deposit?");
-		double amountD = input.nextDouble();
-		this.balance+=amountD;	
-		while(amountD<0){
-			System.out.println("Invalid input!! Please please enter a number greater than 0");
-			this.balance+=amountD;
+		double amountD = 0;
+		try{
+			amountD = input.nextDouble();
 		}
-		while(!input.hasNextDouble()){
-			System.out.println("That is not a valid input!! Please enter a number");
+		catch(Exception e){
+			System.out.println("Invalid input!! Please please enter a number greater than 0");
+			amountD = -1;
 			input.next();
 		}
-		
+		while(amountD<0 || !input.hasNextDouble()){
+			System.out.println("Invalid input!! Please please enter a valid number.");
+			try{
+				amountD = input.nextDouble();
+			}
+			catch(Exception e){
+				amountD = -1;
+				input.next();
+			}
+		}
+		this.balance+=amountD;	
 		System.out.println("Your new balance is " + this.balance);
 		
 	}
@@ -42,16 +51,18 @@ public class Account {
 		double amountW = input.nextDouble();
 		while(balance<amountW){
 			System.out.println("Insufficient Funds! You only have" + balance + "dollars");
-			
+			amountW = input.nextDouble();
 		}
-		while(amountW<0){
-			System.out.println("Invalid input!! Please please enter a number greater than 0");
-			this.balance-=amountW;
+		while(amountW<0 || !input.hasNextDouble()){
+			System.out.println("Invalid input!! Please please enter a number greater than 0");		
+		try{
+			amountW = input.nextDouble();
 		}
-		while(!input.hasNextDouble()){
-			System.out.println("That is not a valid input!! Please enter a number");
+		catch(Exception e){
+			amountW = -1;
 			input.next();
 		}
+	}
 		if(balance>amountW){
 			this.balance-=amountW;
 		}
@@ -72,6 +83,4 @@ public class Account {
 	}
 	
 }
-
-
 
