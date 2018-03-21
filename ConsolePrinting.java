@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -50,10 +51,11 @@ public class ConsolePrinting {
 	 * @param a - ArrayList of accounts
 	 */
 	public static void printAccounts(ArrayList<Account> a){
+		DecimalFormat df = new DecimalFormat("#.00");
 		String[] stats = new String[a.size()*3-1];
 		for(int i=0;i<a.size();i++){
 			stats[i*3] = "Name: "+a.get(i).id;
-			stats[i*3+1] = "Balance: "+a.get(i).balance;
+			stats[i*3+1] = "Balance: "+df.format(a.get(i).balance);
 			if(i!=a.size()-1){
 				stats[i*3+2] = "";
 			}
