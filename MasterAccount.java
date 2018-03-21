@@ -1,5 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * ID: 50018003
+ * By: Daniel Merryweather
+ * Version: 1.1
+ * Creation Date: 19/03/2018
+ * Finish Date: 20/03/2018
+ */
+
 public class MasterAccount {
 
 	int id = 0;
