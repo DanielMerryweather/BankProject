@@ -1,3 +1,8 @@
+/**
+ * @author Harrison Fah
+ * @version 1.2
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,38 +10,14 @@ public class Main {
 	
 	public static FileLoader fl = new FileLoader();
 	public static Scanner keyboardWord = new Scanner(System.in);
-
-	public static void mains(String[] args) {
-		FileLoader fl = new FileLoader();
-		MasterAccount ms = new MasterAccount(1, "Daniel", "test", new ArrayList<Account>());
-		ms.accounts.add(new Account(1000, "Savings"));
-		ms.accounts.add(new Account(2000, "Chequing"));
-		fl.addToArray(ms);
-		ms = new MasterAccount(2, "Harrison", "test2", new ArrayList<Account>());
-		ms.accounts.add(new Account(1500, "Savings"));
-		ms.accounts.add(new Account(2500, "Chequing"));
-		fl.addToArray(ms);
-		fl.fileWriter(fl.accountArray);
-	}
-
-	public static void main(String[] args) {
-		ConsolePrinting.title();
-		System.out.println(
-				"Welcome to DHP Bank\nWould you like to:\n1. Enter account\n2. Create account\n3. Delete account\n4. Shut down");
-		int mainChoice = getInt(4);
-		if (mainChoice == 1) {
-			enterAccount();
-		} else if (mainChoice == 2) {
-			createAccount();
-		} else if (mainChoice == 3) {
-			deleteAccount();
-		}
-		else if (mainChoice == 4){
-			System.out.println("Thank you for choosing DHP Bank.");
-			System.exit(0);
-		}
-	}
 	
+	/**
+	 * Checks to make sure password entered is correct
+	 * 
+	 * @param password Password entered
+	 * @param ms Master account associated
+	 * @return Returns the state boolean
+	 */
 	public static boolean passwordCheck(String password, MasterAccount ms) {
 		boolean state = password.equals(ms.getPass());
 		if (!state) {
@@ -44,7 +25,10 @@ public class Main {
 		}
 		return state;
 	}
-
+	
+	/**
+	 * Method for creating an account and adding it to the arraylist
+	 */
 	public static void createAccount() {
 		System.out.println("What would you like to name the account?");
 		String accName = keyboardWord.nextLine();
@@ -55,6 +39,9 @@ public class Main {
 		main(null);
 	}
 	
+	/**
+	 * Deletes a specified account
+	 */
 	public static void deleteAccount(){
 		System.out.println("What is the id of the account you want to delete?");
 		int idChosen = getInt();
@@ -73,6 +60,9 @@ public class Main {
 		main(null);
 	}
 	
+	/**
+	 * Allows user to enter id for account and then password to edit that account
+	 */
 	public static void enterAccount(){
 		System.out.println("What is the account id?");
 		int id = getInt();
@@ -97,6 +87,11 @@ public class Main {
 		
 	}
 	
+	/**
+	 * Allows user to edit, add, or delete sub-accounts
+	 * 
+	 * @param ms Master account entered
+	 */
 	public static void accountMenu(MasterAccount ms){
 		System.out.println("Would you like to:\n1. Edit account(s)\n2. Add sub-account\n3. Delete sub-account\n4. Exit");
 		int numTyped = getInt(4);
@@ -113,6 +108,12 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Checks to make sure user has entered a valid number between 1 and max
+	 * 
+	 * @param max Maximum value allowed
+	 * @return Returns the valid number entered by user
+	 */
 	public static int getInt(int max){
 		int amount = 0;
 		String in = "";
@@ -134,6 +135,11 @@ public class Main {
 		return amount;
 	}
 	
+	/**
+	 * Checks to make sure user has entered a valid number
+	 * 
+	 * @return Returns valid number entered by user
+	 */
 	public static int getInt(){
 		int amount = 0;
 		String in = "";
@@ -155,6 +161,11 @@ public class Main {
 		return amount;
 	}
 	
+	/**
+	 * Checks to make sure user enters valid double
+	 * 
+	 * @return Returns valid double user enters
+	 */
 	public static double getDoubleInput(){
 		double amount = 0;
 		String in = "";
@@ -176,6 +187,11 @@ public class Main {
 		return amount;
 	}
 	
+	/**
+	 * Allows user to edit sub-accounts by depositing, withdrawing or checking balance
+	 * 
+	 * @param ms Master account entered
+	 */
 	public static void editSub(MasterAccount ms){
 		System.out.println("Sub-accounts in account are:");
 		ConsolePrinting.printAccounts(ms.accounts);
@@ -212,6 +228,11 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Allows user to create either a savings or chequing account if one has no already been created
+	 * 
+	 * @param ms Master account enetered
+	 */
 	public static void addSub(MasterAccount ms){
 		System.out.println("Would you like to create a:\n1.Savings account\n2.Chequing account\n3.Exit");
 		int userInput = getInt(3);
@@ -242,6 +263,11 @@ public class Main {
 		accountMenu(ms);
 	}
 	
+	/**
+	 * Allows user to delete sub-account
+	 * 
+	 * @param ms Master account entered
+	 */
 	public static void deleteSub(MasterAccount ms){
 		System.out.println("Sub-accounts in account are:");
 		ConsolePrinting.printAccounts(ms.accounts);
@@ -261,11 +287,41 @@ public class Main {
 		accountMenu(ms);
 	}
 	
+	/**
+	 * Checks to see if an account exists with name that user has input and if not then make user input valid name
+	 * 
+	 * @param ms Master account enetered
+	 * @param accName Account name user has entered
+	 * @return Returns the valid account name
+	 */
 	public static String checkSubState(MasterAccount ms, String accName){
 		while (ms.loadAccount(accName) == null && !accName.equals("exit")){
 			System.out.println("There is no sub-account with that name. Please re-enter or type 'exit'");
 			accName = keyboardWord.nextLine();
 		}
 		return accName;
+	}
+	
+	/**
+	 * Main method in which user is allowed to enter, create, or delete a master account
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		ConsolePrinting.title();
+		System.out.println(
+				"\nWould you like to:\n1. Enter account\n2. Create account\n3. Delete account\n4. Shut down");
+		int mainChoice = getInt(4);
+		if (mainChoice == 1) {
+			enterAccount();
+		} else if (mainChoice == 2) {
+			createAccount();
+		} else if (mainChoice == 3) {
+			deleteAccount();
+		}
+		else if (mainChoice == 4){
+			System.out.println("Thank you for choosing DHP Bank.");
+			System.exit(0);
+		}
 	}
 }
