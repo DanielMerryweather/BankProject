@@ -45,7 +45,59 @@ public class FileLoader {
 	 * @param ms Master account currently used
 	 */
 	void addToArray(MasterAccount ms){
-		accountArray.add(FileParser.masterAccountToData(ms.id, ms.name, ms.pass, ms.accounts));
+		accountArray.add(FileParser.masterAccountToData(ms));
+	}
+	
+	/**
+	 * Saves a master account and writes it to the file
+	 * 
+	 * @param ms
+	 */
+	void saveMasterAccount(MasterAccount ms){
+		for(int i=0;i<accountArray.size();i++){
+			if(ms.id == FileParser.dataToMasterAccount(accountArray.get(i)).id){
+				accountArray.set(i, FileParser.masterAccountToData(ms));
+			}
+		}
+		fileWriter(this.accountArray);
+	}
+	
+	/**
+	 * Removes the master account specified from the account array
+	 * 
+	 * @param a Master account entered
+	 */
+	public void deleteMasterAccount(MasterAccount a){
+		for(int i=0;i<this.accountArray.size();i++){
+			if(FileParser.dataToMasterAccount(this.accountArray.get(i)).id == a.id){
+				this.accountArray.remove(i);
+			}
+		}
+		fileWriter(this.accountArray);
+	}
+	
+	/**
+	 * Adds a new master account with an unused id to the account array
+	 * 
+	 * @param ms Master account entered
+	 * @return Returns the id
+	 */
+	public int addMasterAccount(MasterAccount ms){
+		int nextId = 0;
+		boolean found = false;
+		while(!found){
+			nextId++;
+			found = true;
+			for(String s : this.accountArray){
+				if(FileParser.dataToMasterAccount(s).id == nextId){
+					found = false;
+				}
+			}
+		}
+		ms.setId(nextId);
+		this.accountArray.add(FileParser.masterAccountToData(ms));
+		fileWriter(this.accountArray);
+		return nextId;
 	}
 	
 	/**
@@ -72,6 +124,7 @@ public class FileLoader {
 		}
 		return accountArr;
 	}
+	
 	/**
 	 * Writes the arraylist line by line into the text file
 	 * 

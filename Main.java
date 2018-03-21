@@ -310,7 +310,7 @@ public class Main {
 	public static void main(String[] args) {
 		ConsolePrinting.title();
 		System.out.println(
-				"\nWould you like to:\n1. Enter account\n2. Create account\n3. Delete account\n4. Shut down");
+				"Would you like to:\n1. Enter account\n2. Create account\n3. Delete account\n4. Shut down");
 		int mainChoice = getInt(4);
 		if (mainChoice == 1) {
 			enterAccount();
