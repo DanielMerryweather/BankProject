@@ -1,3 +1,8 @@
+/**
+ * @author 10239001
+ * @version 1.4
+ */
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,10 +16,19 @@ public class FileLoader {
 	
 	ArrayList<String> accountArray;
 	
+	/**
+	 * Constructor for creating new FileLoader's
+	 */
 	public FileLoader(){
 		accountArray = fileReader();
 	}
 	
+	/**
+	 * Finds the master account with the id input and returns it
+	 * 
+	 * @param id ID input by user
+	 * @return Returns either null if id does not account and the account if it does
+	 */
 	public MasterAccount getMasterAccount(int id){
 		MasterAccount acc;
 		for(String s : accountArray){
@@ -25,15 +39,25 @@ public class FileLoader {
 		return null;
 	}
 	
+	/**
+	 * Adds the master account to the arraylist in specific format
+	 * 
+	 * @param ms Master account currently used
+	 */
 	void addToArray(MasterAccount ms){
 		accountArray.add(FileParser.masterAccountToData(ms.id, ms.name, ms.pass, ms.accounts));
 	}
 	
+	/**
+	 * Reads the text file and inputs all lines into the arraylist
+	 * 
+	 * @return Returns the arraylist
+	 */
 	ArrayList<String> fileReader(){
 		ArrayList<String> accountArr = null;
 		try{
 			FileInputStream fstream = new FileInputStream(
-					"H://Desktop//Eclipse Work//GroupBankProject//src//bankData.txt");
+					"bankData.txt");
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 			accountArr = new ArrayList<String>();
 			String hasNextLine = br.readLine();
@@ -48,11 +72,15 @@ public class FileLoader {
 		}
 		return accountArr;
 	}
-	
+	/**
+	 * Writes the arraylist line by line into the text file
+	 * 
+	 * @param accountArr Arraylist written into file
+	 */
 	void fileWriter(ArrayList<String> accountArr){
 		BufferedWriter bw = null;
 		try{
-			File file = new File("H://Desktop//Eclipse Work//GroupBankProject//src//bankData.txt");
+			File file = new File("bankData.txt");
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			bw.write("");
