@@ -47,7 +47,7 @@ public class ConsolePrinting {
 	}
 	
 	/**
-	 * Nicely prints multiple accounts into console
+	 * Nicely prints multiple accounts into console, uses 2 decimal format
 	 * @param a - ArrayList of accounts
 	 */
 	public static void printAccounts(ArrayList<Account> a){
