@@ -1,6 +1,8 @@
 /**
  * @author Harrison Fah
  * @version 1.2
+ * StartDate: 14/3/2018
+ * FinishDate: 21/3/2018
  */
 
 import java.util.ArrayList;
