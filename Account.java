@@ -1,11 +1,12 @@
 package defaultpackage;
-
 import java.util.Scanner;
 
 /**
  * @author Punit Thanki
- * ID: 20218002
- *
+ * Start Date: 2018/03/14
+ * End Date: 20180/03/19 
+ * UserID: 20218002	
+ * Version 1
  */
 
 public class Account {
@@ -91,3 +92,4 @@ public class Account {
 	}
 
 }
+
